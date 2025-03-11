@@ -1,7 +1,12 @@
 import { z } from "zod";
-import { agregarProducto, obtenerProductos } from "../services/productoService.js";
+import {
+  agregarProducto,
+  editarProducto,
+  obtenerProductos,
+} from "../services/productoService.js";
 const schema = z.object({
   stock: z.number().gte(1, "El stock debe ser minimo 1"),
+  precio: z.number().gte(0.1, "El precio debe ser mayor a 0.1 centimos"),
 });
 
 export const getProductos = async (req, res) => {
@@ -23,5 +28,17 @@ export const postProducto = async (req, res) => {
     res.status(201).json({ message: "Producto agregado" });
   } catch (error) {
     res.status(500).json({ message: "Error al agregar producto" });
+  }
+};
+
+export const putProducto = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await editarProducto(id, req.body);
+    res.json({ message: "Producto editado correctamente" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Ocurrio un error al actualizar el producto", error });
   }
 };
