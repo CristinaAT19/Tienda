@@ -1,8 +1,15 @@
 import tienda from "../config/db.js";
 
+export const obtenerProductosId = async (id) => {
+  const [resultado] = await tienda.query("SELECT * FROM producto WHERE id=?", [
+    id,
+  ]);
+  return resultado;
+};
+
 export const obtenerProductos = async () => {
   const [resultado] = await tienda.query(
-    "SELECT producto.id, producto.nombre,descripcion,precio,categoria.id as categoria_id,categoria.nombre as categoria_nombre  FROM producto INNER JOIN categoria ON producto.categoria_id = categoria.id"
+    "SELECT producto.id, producto.nombre,descripcion,precio,categoria.id as categoria_id,categoria.nombre as categoria_nombre FROM producto INNER JOIN categoria ON producto.categoria_id = categoria.id"
   );
 
   console.log(resultado);
@@ -32,5 +39,12 @@ export const editarProducto = async (id, producto) => {
     "UPDATE producto set nombre = ?, descripcion = ?, precio = ?,  stock = ?, categoria_id = ? WHERE id = ? ",
     [nombre, descripcion, precio, stock, categoria_id, id]
   );
+  return resultado;
+};
+
+export const eliminarProducto = async (id) => {
+  const [resultado] = await tienda.query("DELETE FROM producto WHERE id=?", [
+    id,
+  ]);
   return resultado;
 };
