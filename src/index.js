@@ -7,8 +7,11 @@ import {
   putProducto,
 } from "./controllers/productoController.js";
 import {
+  deleteCategoria,
   getCategoriaById,
   getCategorias,
+  postCategoria,
+  putCategoria,
 } from "./controllers/categoriaController.js";
 
 const app = express();
@@ -23,6 +26,9 @@ app.delete("/eliminarProducto/:id", deleteProducto);
 
 app.get("/categorias", getCategorias);
 app.get("/categorias/:id", getCategoriaById);
+app.post("/agregarCategoria", postCategoria);
+app.put("/editarCategoria/:id", putCategoria);
+app.delete("/eliminarCategoria/:id", deleteCategoria);
 
 app.listen(3000, () => {
   console.log("Servidor corriendo en http://localhost:3000");
