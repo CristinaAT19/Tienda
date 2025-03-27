@@ -21,8 +21,8 @@ export const getCategoriaById = async (req, res) => {
 
 export const getCategorias = async (req, res) => {
   try {
-    const categoria = await obtenerCategoria();
-    res.json(categoria);
+    const categorias = await obtenerCategoria();
+    res.json(categorias);
   } catch (error) {
     res.status(500).json({ message: "Error al obtener la categoria" });
   }

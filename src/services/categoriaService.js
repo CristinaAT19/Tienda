@@ -21,6 +21,8 @@ export const agregarCategoria = async (categoria) => {
     "INSERT INTO categoria (nombre) VALUES (?)",
     [nombre]
   );
+
+  console.log("resultado", resultado.insertId);
   return resultado;
 };
 

@@ -14,6 +14,7 @@ export const obtenerProductos = async () => {
 
   console.log(resultado);
   return resultado?.map((producto) => ({
+    id: producto.id,
     nombre: producto.nombre,
     descripcion: producto.descripcion,
     precio: producto.precio,

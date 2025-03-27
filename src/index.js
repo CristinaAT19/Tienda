@@ -20,6 +20,7 @@ import {
   postCliente,
   putCliente,
 } from "./controllers/clienteController.js";
+import { postVenta } from "./controllers/ventaController.js";
 
 const app = express();
 
@@ -42,6 +43,8 @@ app.get("/clientes", getClientes);
 app.post("/agregarCliente", postCliente);
 app.put("/editarCliente/:id", putCliente);
 app.delete("/eliminarCliente/:id", deleteCliente);
+
+app.post("/ventas", postVenta);
 
 app.listen(3000, () => {
   console.log("Servidor corriendo en http://localhost:3000");

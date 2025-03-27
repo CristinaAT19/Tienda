@@ -34,12 +34,14 @@ export const getProductos = async (req, res) => {
 };
 
 export const postProducto = async (req, res) => {
+  const nuevoProducto = req.body;
+
   const resultado = schema.safeParse(req.body);
   if (!resultado.success) {
     return res.status(400).json({ errors: resultado.error.errors });
   }
   try {
-    await agregarProducto(req.body);
+    await agregarProducto(nuevoProducto);
     res.status(201).json({ message: "Producto agregado" });
   } catch (error) {
     res.status(500).json({ message: "Error al agregar producto" });

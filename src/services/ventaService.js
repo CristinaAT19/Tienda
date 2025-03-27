@@ -4,13 +4,13 @@ export const obtenerVenta = async () => {
   const [resultado] = await tienda.query("SELECT * FROM venta");
   return resultado;
 };
-export const agregarVenta = async () => {
+export const agregarVenta = async (venta) => {
   const { cliente_id, total } = venta;
   const [resultado] = await tienda.query(
     "INSERT INTO venta (cliente_id, total) VALUES (?,?)",
     [cliente_id, total]
   );
-  return resultado;
+  return resultado.insertId;
 };
 
 export const editarVenta = async (id) => {
